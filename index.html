@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRNZ HUB</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script type="module" src="/src/main.ts" defer></script>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="brand">
+        <div class="brand-logo">STRNZ</div>
+        <div class="brand-subtitle">HUB</div>
+      </div>
+
+      <nav class="navigation">
+
+        <button class="nav-item active" data-page="dashboard">
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-page="wod">
+          <span>WOD</span>
+        </button>
+
+        <button class="nav-item" data-page="weekly">
+          <span>Weekly</span>
+        </button>
+
+        <button class="nav-item" data-page="exercises">
+          <span>Exercices</span>
+        </button>
+
+        <button class="nav-item" data-page="calendar">
+          <span>Calendrier</span>
+        </button>
+
+        <button class="nav-item" data-page="production">
+          <span>Production</span>
+        </button>
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="publications"
+        >
+          <span>Publications</span>
+        </button>
+
+        <button class="nav-item" data-page="texts">
+          <span>Textes</span>
+        </button>
+
+        <button class="nav-item" data-page="files">
+          <span>Fichiers</span>
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="sidebar-bottom-actions">
+
+          <button
+            class="nav-item sidebar-icon-button"
+            type="button"
+            data-page="settings"
+            title="Paramètres"
+            aria-label="Paramètres"
+          >
+            <svg
+              class="settings-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
+              <path d="M19.4 13.5a1.6 1.6 0 0 0 0-3l-1-.2a6.7 6.7 0 0 0-.7-1.7l.6-.8a1.6 1.6 0 0 0-2.1-2.1l-.8.6a6.7 6.7 0 0 0-1.7-.7l-.2-1a1.6 1.6 0 0 0-3 0l-.2 1a6.7 6.7 0 0 0-1.7.7l-.8-.6a1.6 1.6 0 0 0-2.1 2.1l.6.8a6.7 6.7 0 0 0-.7 1.7l-1 .2a1.6 1.6 0 0 0 0 3l1 .2a6.7 6.7 0 0 0 .7 1.7l-.6.8a1.6 1.6 0 0 0 2.1 2.1l.8-.6a6.7 6.7 0 0 0 1.7.7l.2 1a1.6 1.6 0 0 0 3 0l.2-1a6.7 6.7 0 0 0 1.7-.7l.8.6a1.6 1.6 0 0 0 2.1-2.1l-.6-.8a6.7 6.7 0 0 0 .7-1.7l1-.2Z" />
+            </svg>
+          </button>
+
+          <button
+            id="refresh-hub-button"
+            class="sidebar-icon-button sidebar-refresh-button"
+            type="button"
+            title="Rafraîchir"
+            aria-label="Rafraîchir"
+          >
+            ↻
+          </button>
+
+        </div>
+
+      </div>
+
+      </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page active">
+
+        <div class="welcome">
+          <div>
+            <span class="eyebrow">CENTRE DE CONTRÔLE</span>
+          </div>
+
+          <button class="primary-button" id="new-wod-button">
+            + Nouveau WOD
+          </button>
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-section">
+
+          <!-- WODS -->
+          <div class="stats-row">
+
+            <div class="stats-row-label">
+              WODS
+            </div>
+
+            <div class="stats-grid">
+
+              <div class="stat-card">
+                <span class="stat-label">TOTAL</span>
+                <strong id="dashboard-wod-total">0</strong>
+                <span class="stat-description">WOD enregistrés</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">À CRÉER</span>
+                <strong id="dashboard-wod-todo">0</strong>
+                <span class="stat-description">WOD à préparer</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">EN COURS</span>
+                <strong id="dashboard-wod-progress">0</strong>
+                <span class="stat-description">WOD en préparation</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">PRÊTS</span>
+                <strong id="dashboard-wod-validated">0</strong>
+                <span class="stat-description">WOD validés</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">PUBLIÉS</span>
+                <strong id="dashboard-wod-published">0</strong>
+                <span class="stat-description">WOD publiés</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- WEEKLIES -->
+          <div class="stats-row">
+
+            <div class="stats-row-label">
+              WEEKLIES
+            </div>
+
+            <div class="stats-grid">
+
+              <div class="stat-card">
+                <span class="stat-label">TOTAL</span>
+                <strong id="dashboard-weekly-total">0</strong>
+                <span class="stat-description">Weeklies enregistrés</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">À CRÉER</span>
+                <strong id="dashboard-weekly-todo">0</strong>
+                <span class="stat-description">Weeklies à préparer</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">EN COURS</span>
+                <strong id="dashboard-weekly-progress">0</strong>
+                <span class="stat-description">Weeklies en préparation</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">PRÊTS</span>
+                <strong id="dashboard-weekly-validated">0</strong>
+                <span class="stat-description">Weeklies validés</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">PUBLIÉS</span>
+                <strong id="dashboard-weekly-published">0</strong>
+                <span class="stat-description">Weeklies publiés</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+          <!-- PUBLICATIONS -->
+          <div class="panel">
+
+            <div class="panel-header">
+              <div>
+                <span class="eyebrow">CALENDRIER</span>
+                <h3>Prochaines publications</h3>
+              </div>
+
+              <button class="text-button" data-page-target="calendar">
+                Voir tout →
+              </button>
+            </div>
+
+            <div id="dashboard-publications">
+            </div>
+
+          </div>
+
+
+          <!-- TASKS -->
+          <div class="panel">
+
+            <div class="panel-header">
+              <div>
+                <span class="eyebrow">ACTION</span>
+                <h3>À faire maintenant</h3>
+              </div>
+            </div>
+
+            <div id="dashboard-action-tasks" class="dashboard-tasks"></div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- OTHER PAGES -->
+      <section id="wod" class="page">
+
+  <div class="section-header">
+    <div>
+      <span class="eyebrow">BASE DE DONNÉES</span>
+    </div>
+
+    <button class="primary-button" id="open-wod-form">
+      + Nouveau WOD
+    </button>
+  </div>
+
+<div class="wod-filters">
+
+  <input
+    type="text"
+    id="wod-search"
+    placeholder="Rechercher un WOD..."
+  />
+
+  <select id="wod-type-filter">
+    <option value="">Tous les types</option>
+    <option value="AMRAP">AMRAP</option>
+    <option value="FOR TIME">FOR TIME</option>
+    <option value="EMOM">EMOM</option>
+    <option value="TABATA">TABATA</option>
+    <option value="FOR REPS">FOR REPS</option>
+  </select>
+
+  <select id="wod-focal-filter">
+    <option value="">Toutes les focales</option>
+    <option value="Full Body">Full Body</option>
+    <option value="Cardio">Cardio</option>
+    <option value="Force">Force</option>
+    <option value="Hypertrophie">Hypertrophie</option>
+    <option value="Endurance musculaire">Endurance musculaire</option>
+    <option value="Mobilité">Mobilité</option>
+    <option value="Technique">Technique</option>
+    <option value="Core">Core</option>
+    <option value="Puissance">Puissance</option>
+    <option value="Conditioning">Conditioning</option>
+    <option value="Multi-focale">Multi-focale</option>
+  </select>
+
+  <select id="wod-level-filter">
+    <option value="">Tous les niveaux</option>
+    <option value="BEGINNER">🟢 Beginner</option>
+    <option value="INTERMEDIATE">🟠 Intermediate</option>
+    <option value="ADVANCED">🔴 Advanced</option>
+  </select>
+
+  <select id="wod-status-filter">
+    <option value="">Tous les statuts</option>
+    <option value="À créer">À créer</option>
+    <option value="En cours">En cours</option>
+    <option value="Prêt">Prêt</option>
+    <option value="Publié">Publié</option>
+  </select>
+
+</div>
+
+  <!-- LISTE DES WOD -->
+  <div class="panel">
+
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">WORKOUTS</span>
+        <h3>WOD enregistrés</h3>
+      </div>
+
+      <span class="counter" id="wod-counter">0 WOD</span>
+    </div>
+
+    <div id="wod-list" class="wod-list">
+
+      <div class="empty-state" id="wod-empty">
+        <span>🏋️</span>
+        <strong>Aucun WOD pour le moment</strong>
+        <p>Commence par créer ton premier WOD.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FORMULAIRE NOUVEAU WOD -->
+  <div class="panel wod-form-panel" id="wod-form-panel">
+
+    <div class="panel-header">
+      <div>
+        <span class="eyebrow">CRÉATION</span>
+        <h3>Nouveau WOD</h3>
+      </div>
+
+      <button class="close-button" id="close-wod-form">
+        ✕
+      </button>
+    </div>
+
+
+    <form id="wod-form">
+
+      <div class="form-grid">
+
+        <!-- NOM -->
+        <div class="form-field">
+          <label for="wod-name">Nom du WOD</label>
+          <input
+            id="wod-name"
+            name="name"
+            type="text"
+            placeholder="Ex : STRNZ 01"
+            required
+          />
+        </div>
+
+
+        <!-- TYPE -->
+        <div class="form-field">
+          <label for="wod-type">Type</label>
+
+          <select id="wod-type" name="type" required>
+            <option value="">Sélectionner</option>
+            <option value="For Time">For Time</option>
+            <option value="AMRAP">AMRAP</option>
+            <option value="EMOM">EMOM</option>
+            <option value="For Reps">For Reps</option>
+            <option value="Strength">Strength</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="wod-focal">Focale</label>
+          <select id="wod-focal" name="focal" required>
+            <option value="">Sélectionner</option>
+            <option value="Full Body">Full Body</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Force">Force</option>
+            <option value="Hypertrophie">Hypertrophie</option>
+            <option value="Endurance musculaire">Endurance musculaire</option>
+            <option value="Mobilité">Mobilité</option>
+            <option value="Technique">Technique</option>
+            <option value="Core">Core</option>
+            <option value="Puissance">Puissance</option>
+            <option value="Conditioning">Conditioning</option>
+            <option value="Multi-focale">Multi-focale</option>
+          </select>
+        </div>
+
+        <!-- DURÉE -->
+        <div class="form-field">
+          <label for="wod-duration">Durée</label>
+
+          <input
+            id="wod-duration"
+            name="duration"
+            type="text"
+            placeholder="Ex : 12 min"
+          />
+        </div>
+
+
+        <!-- MATÉRIEL -->
+        <div class="form-field">
+          <label for="wod-equipment">Matériel</label>
+
+          <input
+            id="wod-equipment"
+            name="equipment"
+            type="text"
+            placeholder="Ex : Kettlebell 16 kg"
+          />
+        </div>
+
+        <!-- SCORE -->
+        <div class="form-field">
+
+          <label for="wod-score">
+            Score
+          </label>
+
+          <input
+            id="wod-score"
+            name="score"
+            type="text"
+            placeholder="Ex : Temps / Reps / Charge"
+          />
+
+        </div>
+
+      </div>
+
+
+      <!-- EXERCICES -->
+      <div class="form-field full-width">
+
+        <label>
+          Exercices / structure du WOD
+        </label>
+
+        <div class="wod-exercise-selector">
+
+          <input
+            type="text"
+            id="wod-exercise-search"
+            placeholder="Rechercher un exercice..."
+          />
+
+          <div
+            id="wod-exercise-list"
+            class="wod-exercise-list"
+          ></div>
+
+          <div class="wod-selected-exercises">
+            <span class="exercise-selector-label">
+              EXERCICES SÉLECTIONNÉS
+            </span>
+
+            <div
+              id="wod-selected-exercises"
+              class="wod-selected-list"
+            ></div>
+          </div>
+        </div>
+
+        <div class="wod-prescriptions">
+
+          <span class="exercise-selector-label">
+            PRESCRIPTIONS PAR NIVEAU
+          </span>
+
+          <section class="wod-prescription-section">
+            <h4>BEGINNER</h4>
+            <div id="wod-prescription-beginner" class="wod-prescription-table"></div>
+          </section>
+
+          <section class="wod-prescription-section">
+            <h4>INTERMEDIATE</h4>
+            <div id="wod-prescription-intermediate" class="wod-prescription-table"></div>
+          </section>
+
+          <section class="wod-prescription-section">
+            <h4>ADVANCED</h4>
+            <div id="wod-prescription-advanced" class="wod-prescription-table"></div>
+          </section>
+
+        </div>
+
+      </div>
+
+
+      <!-- NIVEAUX -->
+      <div class="form-section wod-levels-section">
+
+        <span class="form-section-title">
+          Niveaux disponibles
+        </span>
+
+        <div class="levels">
+
+          <label class="level-option beginner-option">
+            <input
+              type="checkbox"
+              name="beginner"
+              checked
+            />
+            <span>BEGINNER</span>
+          </label>
+
+          <label class="level-option intermediate-option">
+            <input
+              type="checkbox"
+              name="intermediate"
+              checked
+            />
+            <span>INTERMEDIATE</span>
+          </label>
+
+          <label class="level-option advanced-option">
+            <input
+              type="checkbox"
+              name="advanced"
+              checked
+            />
+            <span>ADVANCED</span>
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <!-- DATE / STATUT -->
+      <div class="form-grid wod-final-grid">
+
+        <!-- DATE -->
+        <div class="form-field">
+
+          <label for="wod-date">
+            Date prévue
+          </label>
+
+          <div class="wod-date-picker">
+
+            <input
+              id="wod-date"
+              name="date"
+              type="text"
+              placeholder="JJ/MM/AAAA"
+              autocomplete="off"
+            />
+
+            <button
+              type="button"
+              class="wod-date-picker-button"
+              id="wod-date-picker-button"
+              aria-label="Ouvrir le calendrier"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="16"
+                  rx="2"
+                ></rect>
+
+                <line
+                  x1="7"
+                  y1="3"
+                  x2="7"
+                  y2="7"
+                ></line>
+
+                <line
+                  x1="17"
+                  y1="3"
+                  x2="17"
+                  y2="7"
+                ></line>
+
+                <line
+                  x1="3"
+                  y1="10"
+                  x2="21"
+                  y2="10"
+                ></line>
+              </svg>
+            </button>
+
+            <div
+              class="wod-calendar hidden"
+              id="wod-calendar"
+            >
+
+              <div class="wod-calendar-header">
+
+                <button
+                  type="button"
+                  id="wod-calendar-prev"
+                  class="wod-calendar-nav"
+                >
+                  ‹
+                </button>
+
+                <strong id="wod-calendar-month">
+                  Septembre 2026
+                </strong>
+
+                <button
+                  type="button"
+                  id="wod-calendar-next"
+                  class="wod-calendar-nav"
+                >
+                  ›
+                </button>
+
+              </div>
+
+              <div class="wod-calendar-weekdays">
+                <span>L</span>
+                <span>M</span>
+                <span>M</span>
+                <span>J</span>
+                <span>V</span>
+                <span>S</span>
+                <span>D</span>
+              </div>
+
+              <div
+                class="wod-calendar-days"
+                id="wod-calendar-days"
+              ></div>
+
+              <button
+                type="button"
+                class="wod-calendar-today"
+                id="wod-calendar-today"
+              >
+                Aujourd'hui
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATUT -->
+        <div class="form-field">
+
+          <label for="wod-status">
+            Statut
+          </label>
+
+          <select
+            id="wod-status"
+            name="status"
+          >
+
+            <option value="À créer">
+              À créer
+            </option>
+
+            <option value="En cours">
+              En cours
+            </option>
+
+            <option value="Prêt">
+              Prêt
+            </option>
+
+            <option value="Publié">
+              Publié
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACTIONS -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          id="cancel-wod-form"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+        >
+          Créer le WOD
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</section>
+
+      <section id="weekly" class="page">
+
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">CHALLENGE HEBDOMADAIRE</span>
+          </div>
+
+          <button class="primary-button" id="open-weekly-form">
+            + Nouveau Weekly
+          </button>
+        </div>
+
+        <!-- FILTRES -->
+        <div class="wod-filters">
+
+          <input
+            type="text"
+            id="weekly-search"
+            placeholder="Rechercher un Weekly..."
+          />
+
+          <select id="weekly-status-filter">
+            <option value="">Tous les statuts</option>
+            <option value="À créer">À créer</option>
+            <option value="En cours">En cours</option>
+            <option value="Prêt">Prêt</option>
+            <option value="Publié">Publié</option>
+          </select>
+
+        </div>
+
+        <!-- LISTE -->
+        <div class="panel">
+
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">CHALLENGES</span>
+              <h3>Weekly enregistrés</h3>
+            </div>
+
+            <span class="counter" id="weekly-counter">0 Weekly</span>
+          </div>
+
+          <div id="weekly-list" class="wod-list">
+
+            <div class="empty-state">
+              <span>🏆</span>
+              <strong>Aucun Weekly pour le moment</strong>
+              <p>Commence par créer ton premier Weekly Challenge.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- FORMULAIRE -->
+        <div class="panel wod-form-panel" id="weekly-form-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <span class="eyebrow">CRÉATION</span>
+              <h3>Nouveau Weekly</h3>
+            </div>
+
+            <button class="close-button" id="close-weekly-form">
+              ✕
+            </button>
+
+          </div>
+
+          <form id="weekly-form">
+
+            <div class="form-grid">
+
+              <!-- NOM -->
+              <div class="form-field">
+                <label for="weekly-name">
+                  Nom du Weekly
+                </label>
+
+                <input
+                  id="weekly-name"
+                  name="name"
+                  type="text"
+                  placeholder="Ex : STRNZ Weekly #01"
+                  required
+                />
+              </div>
+
+              <!-- WOD -->
+              <div class="form-field">
+                <label for="weekly-wod">
+                  WOD associé
+                </label>
+
+                <select
+                  id="weekly-wod"
+                  name="wodId"
+                  required
+                >
+                  <option value="">
+                    Sélectionner un WOD
+                  </option>
+                </select>
+              </div>
+
+              <!-- DATE -->
+              <div class="form-field">
+
+                <label for="weekly-date">
+                  Date prévue
+                </label>
+
+                <div class="wod-date-picker">
+
+                  <input
+                    id="weekly-date"
+                    name="date"
+                    type="text"
+                    placeholder="JJ/MM/AAAA"
+                    autocomplete="off"
+                  />
+
+                  <button
+                    type="button"
+                    class="wod-date-picker-button"
+                    id="weekly-date-picker-button"
+                    aria-label="Ouvrir le calendrier"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="16"
+                        rx="2"
+                      ></rect>
+
+                      <line
+                        x1="7"
+                        y1="3"
+                        x2="7"
+                        y2="7"
+                      ></line>
+
+                      <line
+                        x1="17"
+                        y1="3"
+                        x2="17"
+                        y2="7"
+                      ></line>
+
+                      <line
+                        x1="3"
+                        y1="10"
+                        x2="21"
+                        y2="10"
+                      ></line>
+                    </svg>
+                  </button>
+
+                  <div
+                    class="wod-calendar hidden"
+                    id="weekly-calendar"
+                  >
+
+                    <div class="wod-calendar-header">
+
+                      <button
+                        type="button"
+                        id="weekly-calendar-prev"
+                        class="wod-calendar-nav"
+                      >
+                        ‹
+                      </button>
+
+                      <strong id="weekly-calendar-month">
+                        Septembre 2026
+                      </strong>
+
+                      <button
+                        type="button"
+                        id="weekly-calendar-next"
+                        class="wod-calendar-nav"
+                      >
+                        ›
+                      </button>
+
+                    </div>
+
+                    <div class="wod-calendar-weekdays">
+                      <span>L</span>
+                      <span>M</span>
+                      <span>M</span>
+                      <span>J</span>
+                      <span>V</span>
+                      <span>S</span>
+                      <span>D</span>
+                    </div>
+
+                    <div
+                      class="wod-calendar-days"
+                      id="weekly-calendar-days"
+                    ></div>
+
+                    <button
+                      type="button"
+                      class="wod-calendar-today"
+                      id="weekly-calendar-today"
+                    >
+                      Aujourd'hui
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- SCORE -->
+              <div class="form-field">
+                <label for="weekly-score">
+                  Score
+                </label>
+
+                <input
+                  id="weekly-score"
+                  name="score"
+                  type="text"
+                  placeholder="Ex : Temps / Reps / Charge"
+                />
+              </div>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="form-field full-width">
+
+              <label for="weekly-description">
+                Règles / description
+              </label>
+
+              <textarea
+                id="weekly-description"
+                name="description"
+                rows="6"
+                placeholder="Ex :
+      Réaliser le WOD le samedi.
+      Publier son score en commentaire.
+      Respecter les standards de mouvement."
+              ></textarea>
+
+            </div>
+
+            <!-- STATUT -->
+            <div class="form-field">
+
+              <label for="weekly-status">
+                Statut
+              </label>
+
+              <select
+                id="weekly-status"
+                name="status"
+              >
+                <option value="À créer">À créer</option>
+                <option value="En cours">En cours</option>
+                <option value="Prêt">Prêt</option>
+                <option value="Publié">Publié</option>
+              </select>
+
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancel-weekly-form"
+              >
+                Annuler
+              </button>
+
+              <button
+                type="submit"
+                class="primary-button"
+                id="weekly-submit-button"
+              >
+                Créer le Weekly
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </section>
+
+      <section id="exercises" class="page">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">BIBLIOTHÈQUE STRNZ</span>
+          </div>
+
+          <button
+            class="primary-button"
+            id="open-exercise-form"
+            type="button"
+          >
+            + Nouvel exercice
+          </button>
+        </div>
+
+        <div class="wod-filters">
+          <input
+            type="text"
+            id="exercise-search"
+            placeholder="Rechercher un exercice..."
+          />
+
+          <select id="exercise-body-part-filter">
+            <option value="">Toutes les zones</option>
+            <option value="Pectoraux">Pectoraux</option>
+            <option value="Dos">Dos</option>
+            <option value="Épaules">Épaules</option>
+            <option value="Biceps">Biceps</option>
+            <option value="Triceps">Triceps</option>
+            <option value="Avant-bras">Avant-bras</option>
+            <option value="Abdominaux">Abdominaux</option>
+            <option value="Lombaires">Lombaires</option>
+            <option value="Fessiers">Fessiers</option>
+            <option value="Quadriceps">Quadriceps</option>
+            <option value="Ischio-jambiers">Ischio-jambiers</option>
+            <option value="Mollets">Mollets</option>
+            <option value="Adducteurs">Adducteurs</option>
+            <option value="Full Body">Full Body</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">EXERCICES</span>
+              <h3>Bibliothèque d'exercices</h3>
+            </div>
+
+            <span
+              class="counter"
+              id="exercise-counter"
+            >
+              0 exercices
+            </span>
+          </div>
+
+          <div
+            id="exercise-list"
+            class="wod-list"
+          ></div>
+        </div>
+
+        <!-- FORMULAIRE EXERCICE — CLASSES ENTIÈREMENT ISOLÉES -->
+
+        <div
+          class="panel exercise-form-panel"
+          id="exercise-form-panel"
+        >
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">
+                BIBLIOTHÈQUE
+              </span>
+
+              <h3>Nouvel exercice</h3>
+            </div>
+
+            <button
+              class="close-button"
+              id="close-exercise-form"
+              type="button"
+            >
+              ✕
+            </button>
+          </div>
+
+          <form id="exercise-form">
+
+            <div class="exercise-form-grid">
+
+              <div class="exercise-form-field">
+                <label for="exercise-name">
+                  Nom
+                </label>
+
+                <input
+                  id="exercise-name"
+                  name="name"
+                  type="text"
+                  placeholder="Ex : Burpees"
+                  required
+                />
+              </div>
+
+              <div class="exercise-form-field">
+                <label for="exercise-equipment">
+                  Matériel
+                </label>
+
+                <input
+                  id="exercise-equipment"
+                  name="equipment"
+                  type="text"
+                  placeholder="Ex : Kettlebell"
+                />
+              </div>
+
+              <div class="exercise-form-field">
+                <label for="exercise-pictogramme">
+                  ID du pictogramme
+                </label>
+
+                <input
+                  id="exercise-pictogramme"
+                  name="pictogrammeId"
+                  type="text"
+                  placeholder="Ex : PIC-BURPEE"
+                />
+              </div>
+
+              <div class="exercise-form-field exercise-form-field-full">
+                <label>
+                  Zones ciblées
+                </label>
+
+                <div class="exercise-body-parts">
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Pectoraux" />
+                    <span>Pectoraux</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Dos" />
+                    <span>Dos</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Épaules" />
+                    <span>Épaules</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Biceps" />
+                    <span>Biceps</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Triceps" />
+                    <span>Triceps</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Avant-bras" />
+                    <span>Avant-bras</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Abdominaux" />
+                    <span>Abdominaux</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Lombaires" />
+                    <span>Lombaires</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Fessiers" />
+                    <span>Fessiers</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Quadriceps" />
+                    <span>Quadriceps</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Ischio-jambiers" />
+                    <span>Ischio-jambiers</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Mollets" />
+                    <span>Mollets</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Adducteurs" />
+                    <span>Adducteurs</span>
+                  </label>
+
+                  <label class="exercise-level-option">
+                    <input type="checkbox" name="bodyParts" value="Full Body" />
+                    <span>Full Body</span>
+                  </label>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="exercise-form-field exercise-form-field-full">
+              <label for="exercise-description">
+                Description
+              </label>
+
+              <textarea
+                id="exercise-description"
+                name="description"
+                rows="5"
+                placeholder="Description du mouvement..."
+              ></textarea>
+            </div>
+
+            <div class="exercise-form-section">
+
+              <label class="exercise-level-option">
+
+                <input
+                  type="checkbox"
+                  name="active"
+                  checked
+                />
+
+                <span>
+                  Exercice actif
+                </span>
+
+              </label>
+
+            </div>
+
+            <div class="exercise-form-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancel-exercise-form"
+              >
+                Annuler
+              </button>
+
+              <button
+                type="submit"
+                class="primary-button"
+              >
+                Enregistrer
+              </button>
+
+            </div>
+
+          </form>
+        </div>
+      </section>
+
+      <section id="calendar" class="page">
+
+        <div class="section-header">
+
+          <div>
+            <span class="eyebrow">STRNZ PLANNING</span>
+          </div>
+
+          <div class="calendar-actions">
+            <button
+              id="calendar-prev"
+              class="secondary-button"
+              type="button"
+            >
+              ←
+            </button>
+
+            <button
+              id="calendar-today"
+              class="secondary-button"
+              type="button"
+            >
+              Aujourd'hui
+            </button>
+
+            <button
+              id="calendar-next"
+              class="secondary-button"
+              type="button"
+            >
+              →
+            </button>
+          </div>
+
+        </div>
+
+        <div class="calendar-title-row">
+          <h3 id="calendar-month-title"></h3>
+        </div>
+
+        <div id="calendar-grid" class="calendar-grid"></div>
+
+      </section>
+
+      <section id="production" class="page">
+
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">CRÉATION DE CONTENU</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <span class="stat-label">À PRODUIRE</span>
+            <strong id="production-todo">0</strong>
+            <span class="stat-description">Contenus à préparer</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">EN PRODUCTION</span>
+            <strong id="production-progress">0</strong>
+            <span class="stat-description">Contenus en cours</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">PRÊTS</span>
+            <strong id="production-ready">0</strong>
+            <span class="stat-description">Contenus prêts</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">PUBLIÉS</span>
+            <strong id="production-published">0</strong>
+            <span class="stat-description">Contenus publiés</span>
+          </div>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">CONTENUS</span>
+              <h3>Production à venir</h3>
+            </div>
+          </div>
+
+          <div class="wod-filters">
+
+            <input
+              type="text"
+              id="production-search"
+              placeholder="Rechercher un WOD..."
+            />
+
+            <select id="production-status-filter">
+              <option value="">Tous les statuts</option>
+              <option value="À créer">À créer</option>
+              <option value="En cours">En cours</option>
+              <option value="Prêt">Prêt</option>
+            </select>
+
+            <select id="production-progress-filter">
+              <option value="">Toutes les progressions</option>
+              <option value="0">0/3</option>
+              <option value="1">1/3</option>
+              <option value="2">2/3</option>
+              <option value="3">3/3</option>
+            </select>
+
+        </div>
+
+          <div id="production-list" class="production-list">
+
+            <div class="empty-state">
+              <span>🎨</span>
+              <strong>Aucun contenu à produire</strong>
+              <p>Les contenus liés aux WOD apparaîtront ici.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="publications" class="page">
+
+        <div class="section-header">
+
+          <div>
+
+            <span class="eyebrow">
+              STRNZ ARCHIVES
+            </span>
+          </div>
+
+        </div>
+
+        <div class="wod-filters">
+
+          <input
+            type="text"
+            id="publications-search"
+            placeholder="Rechercher une publication..."
+          />
+
+          <select id="publications-type-filter">
+
+            <option value="all">
+              Tous les types
+            </option>
+
+            <option value="wod">
+              WOD
+            </option>
+
+            <option value="weekly">
+              Weekly
+            </option>
+
+          </select>
+
+        </div>
+
+        <div
+          id="publications-list"
+          class="wod-list"
+        ></div>
+
+      </section>
+
+      <section id="texts" class="page">
+
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">STRNZ TEXTES</span>
+          </div>
+        </div>
+
+        <div class="wod-filters">
+
+          <input
+            type="text"
+            id="texts-search"
+            placeholder="Rechercher une publication..."
+          />
+
+          <select id="texts-type-filter">
+            <option value="all">Tous les types</option>
+            <option value="wod">WOD</option>
+            <option value="weekly">Weekly</option>
+          </select>
+
+        </div>
+
+        <div id="texts-list" class="wod-list"></div>
+
+        <!-- ÉDITEUR DE TEXTE -->
+        <div id="text-editor-modal" class="modal hidden">
+
+          <div
+            class="modal-overlay"
+            id="text-editor-overlay"
+          ></div>
+
+          <div class="modal-content text-editor-modal">
+
+            <div class="modal-header">
+
+              <div class="text-editor-header">
+
+                <div>
+                  <span
+                    class="modal-eyebrow"
+                    id="text-editor-id"
+                  >
+                    WOD-001
+                  </span>
+
+                  <h2 id="text-editor-title">
+                    WOD
+                  </h2>
+                </div>
+
+                <div
+                  id="text-editor-status"
+                  class="production-card-status"
+                >
+                  Prêt
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="text-editor-body">
+
+              <div class="text-editor-wrapper">
+
+                <div
+                  class="text-editor-guides"
+                  aria-hidden="true"
+                >
+                  <span>CAPTION</span>
+                  <span>HASHTAGS</span>
+                  <span>CTA</span>
+                </div>
+
+                <textarea
+                  id="text-editor-input"
+                  placeholder=""
+                ></textarea>
+
+              </div>
+
+            </div>
+
+            <div class="text-editor-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="text-editor-copy"
+              >
+                Copier
+              </button>
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="text-editor-close"
+              >
+                Fermer
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="files" class="page">
+
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">STRNZ FILES</span>
+          </div>
+        </div>
+
+        <div class="wod-filters">
+
+          <input
+            id="files-search"
+            type="text"
+            placeholder="Rechercher un fichier..."
+          />
+
+          <select id="files-type-filter">
+            <option value="all">Tous les fichiers</option>
+            <option value="visual">Visuels</option>
+            <option value="video">Vidéos</option>
+            <option value="document">Documents</option>
+            <option value="other">Autres</option>
+          </select>
+
+          <button
+            id="files-add-button"
+            class="files-add-button"
+            type="button"
+          >
+            + Ajouter un fichier
+          </button>
+
+        </div>
+
+        <!-- EXPLORATEUR STRNZ -->
+
+        <div class="files-explorer">
+
+          <div class="files-explorer-header">
+
+            <div>
+              <span class="eyebrow">
+                EXPLORATEUR
+              </span>
+
+              <h3>
+                Fichiers STRNZ
+              </h3>
+            </div>
+
+          </div>
+
+          <div
+            id="files-explorer-tree"
+            class="files-explorer-tree"
+          ></div>
+
+        </div>
+
+        <div id="files-list" class="wod-list"></div>
+
+        <!-- MODALE AJOUT FICHIER -->
+
+        <div
+          id="file-form-panel"
+          class="modal-overlay"
+          style="display: none;"
+        >
+
+          <div class="modal-content wod-detail-modal">
+
+            <div class="modal-header">
+
+              <div>
+                <span class="modal-eyebrow">
+                  STRNZ ASSETS
+                </span>
+
+                <h2>
+                  Ajouter un fichier
+                </h2>
+              </div>
+
+            </div>
+
+
+            <div class="wod-detail-content">
+
+              <div
+                id="file-upload-zone"
+                class="file-upload-zone"
+              >
+
+                <span class="file-upload-icon">＋</span>
+
+                <strong>Sélectionner un fichier</strong>
+
+                <span class="file-upload-description">
+                  Clique ici ou glisse-dépose un fichier
+                </span>
+
+                <input
+                  id="file-input"
+                  type="file"
+                  multiple
+                />
+
+              </div>
+
+              <div
+                id="file-preview"
+                class="file-preview"
+              >
+                <div class="file-preview-icon">
+                  📄
+                </div>
+
+                <div class="file-preview-info">
+
+                  <strong>Aucun fichier sélectionné</strong>
+
+                  <span>
+                    Le fichier sélectionné apparaîtra ici
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="file-form-actions">
+
+                <button
+                  id="file-form-cancel"
+                  class="secondary-button"
+                  type="button"
+                >
+                  Annuler
+                </button>
+
+                <button
+                  id="file-form-save"
+                  class="primary-button"
+                  type="button"
+                >
+                  Ajouter les fichiers
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="settings" class="page">
+        <div class="page-placeholder">
+          <h2>Paramètres</h2>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+<!-- WEEKLY DETAIL MODAL -->
+<div id="weekly-detail-modal" class="modal hidden">
+  <div
+    class="modal-overlay"
+    id="weekly-detail-overlay"
+  ></div>
+
+  <div class="modal-content weekly-detail-modal">
+
+    <div class="modal-header">
+
+      <div class="weekly-detail-topline">
+
+        <span
+          class="modal-eyebrow"
+          id="weekly-detail-id"
+        >
+          WEEKLY-001
+        </span>
+
+        <h2 id="weekly-detail-title">
+          Weekly
+        </h2>
+
+        <div
+          id="weekly-detail-status"
+          class="weekly-detail-status"
+        >
+          Prêt
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      id="weekly-detail-content"
+      class="weekly-detail-content"
+    ></div>
+
+  </div>
+</div>
+
+<!-- WOD DETAIL MODAL -->
+<div id="wod-detail-modal" class="modal hidden">
+
+  <div
+    class="modal-overlay"
+    id="wod-detail-overlay"
+  ></div>
+
+  <div class="modal-content wod-detail-modal">
+
+    <div class="modal-header">
+
+      <div class="wod-detail-topline">
+
+        <span
+          class="modal-eyebrow"
+          id="wod-detail-id"
+        >
+          WOD-001
+        </span>
+
+        <h2 id="wod-detail-title">
+          WOD
+        </h2>
+
+        <div
+          id="wod-detail-status"
+          class="wod-detail-status"
+        >
+          Prêt
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      id="wod-detail-content"
+      class="wod-detail-content"
+    >
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
